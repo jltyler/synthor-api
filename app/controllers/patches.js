@@ -24,20 +24,44 @@ const show = (req, res) => {
 }
 
 const create = (req, res, next) => {
+  // console.log('patches.create')
+  // console.log(req.body);
   const patch = Object.assign(req.body.patch, {
     _owner: req.user._id
   })
+  // console.log('passed patch assignment')
+  // console.log(patch)
   Patch.create(patch)
-    .then(patch =>
-      res.status(201)
-        .json({
-          patch: patch.toJSON({ virtuals: true, user: req.user })
-        }))
+    .then(patch => {
+      // console.log('created?')
+      return res.status(201)
+      .json({
+        patch: patch.toJSON({ virtuals: true, user: req.user })
+      })
+    })
     .catch(next)
 }
 
 const update = (req, res, next) => {
   delete req.body._owner  // disallow owner reassignment.
+  // Check if osc is being updated and copyy unlisted properties
+  // Lets just leave this feature out for now and worry later if I have time
+  // console.log('patch.update')
+  // console.log('req.patch:', req.patch)
+  // console.log('req.body.patch:', req.body.patch)
+  // if (req.body.patch.osc1) {
+  //   console.log('We are updating some osc1 settings...')
+  //   for (const key in req.patch.osc1) {
+  //     console.log('Checking osc1.' + key)
+  //     if (req.patch.osc1.hasOwnProperty(key)) {
+  //       console.log('Found non-proto osc1.' + key)
+  //       if (!req.body.patch.osc1.hasOwnProperty(key)) {
+  //         console.log('Did not find non-proto osc1.' + key + ' on body.patch')
+  //         req.body.patch[key] = req.patch[key]
+  //       }
+  //     }
+  //   }
+  // }
   req.patch.update(req.body.patch)
     .then(() => res.sendStatus(204))
     .catch(next)

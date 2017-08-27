@@ -10,7 +10,8 @@ curl "${API}${URL_PATH}/${ID}" \
   --header "Authorization: Token token=${TOKEN}" \
   --data '{
     "patch": {
-      "name": "'"${TEXT}"'"
+      "name": "LOLOLO2",
+      "osc1Volume": 0.2
     }
   }'
 

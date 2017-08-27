@@ -10,7 +10,19 @@ curl "${API}${URL_PATH}" \
   --header "Authorization: Token token=${TOKEN}" \
   --data '{
     "patch": {
-      "name": "new test patch"
+      "name": "new test patch",
+      "osc1Volume": 1.0,
+      "osc1Octave": 0,
+      "osc1Detune": 0,
+      "osc1Waveform": "sawtooth",
+      "osc1Unison": 1,
+      "osc1Panning": 0,
+      "osc1TremoloAmp": 0,
+      "osc1TremoloFreq": 0,
+      "osc1Attack": 0.1,
+      "osc1Decay": 0.1,
+      "osc1Sustain": 0.6,
+      "osc1Release": 0.4
     }
   }'
 
