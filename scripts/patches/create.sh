@@ -22,7 +22,16 @@ curl "${API}${URL_PATH}" \
       "osc1Attack": 0.1,
       "osc1Decay": 0.1,
       "osc1Sustain": 0.6,
-      "osc1Release": 0.4
+      "osc1Release": 0.4,
+      "filterFrequency": 4500,
+      "filterQ": 5,
+      "filterEnv": 4500,
+      "filterTremoloAmp": 0,
+      "filterTremoloFreq": 0,
+      "filterAttack": 0.2,
+      "filterDecay": 0,
+      "filterSustain": 1,
+      "filterRelease": 0.5
     }
   }'
 

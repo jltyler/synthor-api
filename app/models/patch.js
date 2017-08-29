@@ -56,6 +56,42 @@ const patchSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  filterFrequency: {
+    type: Number,
+    required: true
+  },
+  filterQ: {
+    type: Number,
+    required: true
+  },
+  filterEnv: {
+    type: Number,
+    required: true
+  },
+  filterTremoloAmp: {
+    type: Number,
+    required: true
+  },
+  filterTremoloFreq: {
+    type: Number,
+    required: true
+  },
+  filterAttack: {
+    type: Number,
+    required: true
+  },
+  filterDecay: {
+    type: Number,
+    required: true
+  },
+  filterSustain: {
+    type: Number,
+    required: true
+  },
+  filterRelease: {
+    type: Number,
+    required: true
+  },
   _owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
