@@ -1,5 +1,6 @@
 'use strict'
 
+const HttpError = require('lib/wiring/errors/http-error')
 const controller = require('lib/wiring/controller')
 const models = require('app/models')
 const Patch = models.patch
@@ -8,8 +9,11 @@ const authenticate = require('./concerns/authenticate')
 const setUser = require('./concerns/set-current-user')
 const setModel = require('./concerns/set-mongoose-model')
 
+
 const index = (req, res, next) => {
-  Patch.find()
+  // If user then get both user patches and the public patches
+  const query = req.user ? {$or: [{_owner: req.user._id}, {isPrivate: false}]} : {isPrivate: false}
+  Patch.find(query)
     .then(patches => res.json({
       patches: patches.map((e) =>
         e.toJSON({ virtuals: true, user: req.user }))
@@ -18,9 +22,20 @@ const index = (req, res, next) => {
 }
 
 const show = (req, res) => {
-  res.json({
-    patch: req.patch.toJSON({ virtuals: true, user: req.user })
-  })
+  let allowIt = true
+  if (req.patch.isPrivate) {
+    if (!req.user || req.user._id.toString() !== req.patch._owner.toString()) {
+      allowIt = false
+    }
+  }
+  if (allowIt) {
+    res.json({
+      patch: req.patch.toJSON({ virtuals: true, user: req.user })
+    })
+  } else {
+    console.log('!!!NOT ALLOWED!!!')
+    res.sendStatus(404)
+  }
 }
 
 const create = (req, res, next) => {
@@ -44,6 +59,7 @@ const create = (req, res, next) => {
 
 const update = (req, res, next) => {
   delete req.body._owner  // disallow owner reassignment.
+  delete req.body.patch.isPrivate  // disallow privacy reassignment.
   // Check if osc is being updated and copyy unlisted properties
   // Lets just leave this feature out for now and worry later if I have time
   // console.log('patch.update')
