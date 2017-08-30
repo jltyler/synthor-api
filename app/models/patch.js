@@ -7,6 +7,10 @@ const patchSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  isPrivate: {
+    type: Boolean,
+    default: false
+  },
   // Oscillator 1 settings
   osc1Waveform: {
     type: String,
