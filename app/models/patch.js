@@ -62,6 +62,11 @@ const patchSchema = new mongoose.Schema({
   filterFrequency: { type: Number, required: true },
   filterQ: { type: Number, required: true },
   filterEnv: { type: Number, required: true },
+  filterTremoloWaveform: {
+    type: String,
+    required: true,
+    enum: ['sawtooth', 'sine', 'square', 'triangle']
+  },
   filterTremoloAmp: { type: Number, required: true },
   filterTremoloFreq: { type: Number, required: true },
   filterAttack: { type: Number, required: true },
