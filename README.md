@@ -1,8 +1,11 @@
 # Synthor API
 ## Links
 Deployed front end app: https://jltyler.github.io/synthor-front
-Deployed API: https://peaceful-wildwood-37664.herokuapp.com/
+
+Deployed API: https://peaceful-wildwood-37664.herokuapp.com
+
 Front end repo: https://github.com/jltyler/synthor-front
+
 
 ## What is this?
 The API to go along with my Synthor single page application. This API is responsible for persisting patch data for use later.
